@@ -1,0 +1,11 @@
+.myCanvas {
+    border: 2px solid black;
+    display: block;
+    margin: auto;
+    margin-top: 30px;
+}
+
+.dropdown-options {
+    text-align: center;
+    margin-top: 40px;
+}

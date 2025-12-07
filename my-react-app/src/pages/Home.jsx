@@ -1,9 +1,18 @@
+import { useState } from 'react';
+import Animation from '../components/animation';
+
 function Home () {
+      const [playerState, setPlayerState] = useState('idle');
   return (
     <>
-        <div class = "dropdown-options">
+        <div className = "dropdown-options">
         <h1>Check out the different type of animations!</h1>
-        <select id="animations" name = "animations">
+            <select 
+            id="animations" 
+            name="animations"
+            value={playerState}
+            onChange={(e) => setPlayerState(e.target.value)} // ADDED: Makes dropdown work
+            >
             <option value="idle">Idle</option>
             <option value="jump">Jump</option>
             <option value="fall">Fall</option>
@@ -16,7 +25,7 @@ function Home () {
             <option value="getHit">GetHit</option>
         </select>
     </div>
-    <canvas id="myCanvas" class="myCanvas"></canvas>
+      <Animation playerState={playerState} />
     </>
   )
 }
