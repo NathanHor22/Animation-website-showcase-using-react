@@ -33,6 +33,8 @@ useEffect(() => {
     let gameFrame = 0;
     const staggerFrames = 6; //slowing down the animation speed
     const spriteAnimations = [];
+    let animationId =null;
+    let isActive = true;
     //looping through the animation states and setting up the frames for each state
     animationStates.forEach((state, index) => {
     let frames = {
@@ -47,9 +49,9 @@ useEffect(() => {
     spriteAnimations[state.name] = frames;
     });
 
-    let animationId =null;
 
     function animate(){
+      if(!isActive) return; //stops if component unmounted
     //clear old paint, specificing if we want to clear the whole canvas
     ctx.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
     //ctx.drawImage(image, sx, sy, sw, sh, dx, dy, dw, dh); (reference)
@@ -64,10 +66,13 @@ useEffect(() => {
     }
 
     playerImage.onload = () => {
-      animate();
+      if(isActive) {
+        animate();
+      }
     };
 
     return () => {
+      isActive = false;
       //stops the old animation when component updates or unmounts
       //to prevent memory leak to making the website slower
       if(animationId) {
