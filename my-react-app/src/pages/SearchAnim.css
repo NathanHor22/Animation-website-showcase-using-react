@@ -1,0 +1,17 @@
+.search-bar {
+    border-bottom: 1px rgba(0, 0, 0, 0.301);
+    background-color: white;
+    width: 500px;
+    height: 40px;
+    padding: 20px;
+    box-sizing: border-box;
+    display: block;
+}
+
+.search-bar:hover {
+    border: 1px solid blue;
+}
+
+.search-bar::placeholder {
+    color:gray;
+}
