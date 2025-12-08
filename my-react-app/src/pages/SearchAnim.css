@@ -6,6 +6,8 @@
     padding: 20px;
     box-sizing: border-box;
     display: block;
+    margin: 2rem auto;
+    color: black;
 }
 
 .search-bar:hover {
@@ -14,4 +16,41 @@
 
 .search-bar::placeholder {
     color:gray;
+}
+
+.animation-results {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
+    grid-auto-rows: 400px; /* Fixed row height */
+    gap: 2rem;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    min-height: 200px; /* Prevents search bar from moving when results change */
+}
+
+.animation-item {
+    border: 2px solid #ddd;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.animation-item:hover {
+    border-color: blue;
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.animation-item h3 {
+    margin: 0.5rem 0;
+    text-transform: capitalize;
+    color: #333;
+}
+
+.animation-item p {
+    color: #666;
+    margin: 0;
 }

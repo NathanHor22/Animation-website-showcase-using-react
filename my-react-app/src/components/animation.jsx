@@ -1,5 +1,18 @@
 import {useEffect, useRef } from 'react';
 
+    export const animationStates = [
+      { name: 'idle', frames: 7 },
+      { name: 'jump', frames: 7 },
+      { name: 'fall', frames: 7 },
+      { name: 'run', frames: 9 },
+      { name: 'dizzy', frames: 11 },
+      { name: 'sit', frames: 5 },
+      { name: 'roll', frames: 7 },
+      { name: 'bite', frames: 7 },
+      { name: 'ko', frames: 12 },
+      { name: 'getHit', frames: 4 }
+    ];
+    
 function Animation ( {playerState, width = 600, height = 600} ) {
 const canvasRef = useRef(null);
 
@@ -20,19 +33,6 @@ useEffect(() => {
     let gameFrame = 0;
     const staggerFrames = 6; //slowing down the animation speed
     const spriteAnimations = [];
-    const animationStates = [
-      { name: 'idle', frames: 7 },
-      { name: 'jump', frames: 7 },
-      { name: 'fall', frames: 7 },
-      { name: 'run', frames: 9 },
-      { name: 'dizzy', frames: 11 },
-      { name: 'sit', frames: 5 },
-      { name: 'roll', frames: 7 },
-      { name: 'bite', frames: 7 },
-      { name: 'ko', frames: 12 },
-      { name: 'getHit', frames: 4 }
-    ];
-
     //looping through the animation states and setting up the frames for each state
     animationStates.forEach((state, index) => {
     let frames = {
@@ -47,7 +47,7 @@ useEffect(() => {
     spriteAnimations[state.name] = frames;
     });
 
-    let animationId;
+    let animationId =null;
 
     function animate(){
     //clear old paint, specificing if we want to clear the whole canvas
@@ -56,7 +56,7 @@ useEffect(() => {
     let position  = Math.floor(gameFrame/staggerFrames) % spriteAnimations[playerState].loc.length;
     let frameX = spriteWidth * position;
     let frameY = spriteAnimations[playerState].loc[position].y;
-    ctx.drawImage(playerImage, frameX , frameY , spriteWidth, spriteHeight, 0, 0, spriteWidth, spriteHeight);
+    ctx.drawImage(playerImage, frameX , frameY , spriteWidth, spriteHeight, 0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
     gameFrame++;
     //running over and over, creating a loop
@@ -68,7 +68,11 @@ useEffect(() => {
     };
 
     return () => {
-      cancelAnimationFrame(animationId);
+      //stops the old animation when component updates or unmounts
+      //to prevent memory leak to making the website slower
+      if(animationId) {
+        cancelAnimationFrame(animationId);
+      }
     };
     }, [playerState, width, height]);
 
