@@ -11,6 +11,7 @@ function SearchAnim() {
 
     return (
         <>
+        <div className='animation-text'>
             <h2>Look at our selection of animation</h2>
                 <input 
                 type="text"
@@ -19,7 +20,8 @@ function SearchAnim() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
             />
-            
+        </div>
+
             <div className = "animation-results">
                 {/* takes each animation and create a clickable box */}
                 {filterAnimations.map(animation => (
