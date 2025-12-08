@@ -11,7 +11,7 @@ function Home () {
             id="animations" 
             name="animations"
             value={playerState}
-            onChange={(e) => setPlayerState(e.target.value)} // ADDED: Makes dropdown work
+            onChange={(e) => setPlayerState(e.target.value)}
             >
             <option value="idle">Idle</option>
             <option value="jump">Jump</option>
