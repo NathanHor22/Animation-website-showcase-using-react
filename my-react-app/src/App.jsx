@@ -11,7 +11,7 @@ function App() {
       <nav className ="navbar">
         <div className = "nav-links">
           <Link to ="/">Home</Link>
-          <Link to ="/searchAnim">SearchAnim</Link>
+          <Link to ="/searchAnim">Animations</Link>
           </div>
       </nav>
       <Routes>
